@@ -12,13 +12,13 @@ def index():
 
 @app.route('/read')
 def read():
-    return 'read' + str(cache)
+    return f'read favorite number {str(cache)}'
 
 
 @app.route('/update')
 def update():
     cache["favorite number"] = randint(1, 100)
-    return 'update' + str(cache)
+    return f'updated favorite number {str(cache)}'
 
 
 @app.route('/favorite_number', methods=['GET','POST'])
