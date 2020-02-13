@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 from random import randint
 
 app = Flask(__name__)
-cashe = {'favorite number': None}
+cache = {'favorite number': None}
 
 
 @app.route('/')
@@ -12,13 +12,13 @@ def index():
 
 @app.route('/read')
 def read():
-    return str(cashe)
+    return 'read' + str(cache)
 
 
 @app.route('/update')
 def update():
-    cashe["favorite number"] = randint(1, 100)
-    return str(cashe)
+    cache["favorite number"] = randint(1, 100)
+    return 'update' + str(cache)
 
 
 @app.route('/favorite_number', methods=['GET','POST'])
@@ -29,6 +29,14 @@ def fav_num():
     print(f'My method was {request.method}')
     return ''
 
+
+# Creating new route that updates cashe with either GET or POST.
+@app.route('/activate', methods=['GET','POST'])
+def activate():
+    if request.method == 'GET':
+        return read()
+    elif request.method == 'POST':
+        return update()
 
 if __name__ == '__main__':
     app.run(debug=True)
