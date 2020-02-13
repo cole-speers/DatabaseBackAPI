@@ -23,10 +23,11 @@ def debug():
 @app.route('/favorite_number', methods=['GET','POST'])
 def favorite_number():
     if request.method == 'GET':
-        return f'read favorite number {str(cache)}'
+        return f'read favorite number {cache}'
     elif request.method == 'POST':
         cache["favorite number"] = randint(1, 100)
-        return f'updated favorite number {str(cache)}'
+        return f'updated favorite number {cache}'
+
 
 if __name__ == '__main__':
     app.run(debug=True)
